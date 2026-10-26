@@ -74,3 +74,41 @@ for i, field in enumerate(fields):
 
 # --- 3. LOGIKA PREDIKSI & SUBMIT ---
 def read_form():
+  nama = entries["Nama Siswa"].get().strip()
+  bio_str = entries["Nilai Biologi"].get().strip()
+  fis_str = entries["Nilai Fisika"].get().strip()
+  ing_str = entries["Nilai Inggris"].get().strip()
+
+  if not nama or not bio_str or not fis_str or not ing_str:
+    messagebox.showwarning("Peringatan", "Semua kolom wajib diisi!")
+    return None
+
+  if not (bio_str.isdigit() and fis_str.isdigit() and ing_str.isdigit()):
+    messagebox.showwarning(
+        "Peringatan", "Nilai Biologi, Fisika, dan Inggris harus berupa angka!"
+    )
+    return None
+
+  biologi = int(bio_str)
+  fisika = int(fis_str)
+  inggris = int(ing_str)
+
+  # Kondisi nilai tertinggi untuk menentukan prediksi fakultas
+  if biologi > fisika and biologi > inggris:
+    prediksi = "Kedokteran"
+  elif fisika > biologi and fisika > inggris:
+    prediksi = "Teknik"
+  elif inggris > biologi and inggris > fisika:
+    prediksi = "Bahasa"
+  else:
+    prediksi = "Umum / Campuran"
+
+  return nama, biologi, fisika, inggris, prediksi
+
+
+def clear_form():
+  for entry in entries.values():
+    entry.delete(0, tk.END)
+
+
+def refresh_table():
