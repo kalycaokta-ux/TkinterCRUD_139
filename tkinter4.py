@@ -16,21 +16,21 @@ def run_query(sql, params=()):
 
 def init_db():
   run_query("""CREATE TABLE IF NOT EXISTS nilai_siswa (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          nama_siswa TEXT NOT NULL,
-          biologi INTEGER,
-          fisika INTEGER,
-          inggris INTEGER,
-          prediksi_fakultas TEXT
-      )""")
-  
-  
-  def add_student(nama, biologi, fisika, inggris, prediksi):
-    run_query(
-        "INSERT INTO nilai_siswa (nama_siswa, biologi, fisika, inggris,"
-        " prediksi_fakultas) VALUES (?, ?, ?, ?, ?)",
-        (nama, biologi, fisika, inggris, prediksi),
-    )
-  
-  
-  def get_students():
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nama_siswa TEXT NOT NULL,
+        biologi INTEGER,
+        fisika INTEGER,
+        inggris INTEGER,
+        prediksi_fakultas TEXT
+    )""")
+
+
+def add_student(nama, biologi, fisika, inggris, prediksi):
+  run_query(
+      "INSERT INTO nilai_siswa (nama_siswa, biologi, fisika, inggris,"
+      " prediksi_fakultas) VALUES (?, ?, ?, ?, ?)",
+      (nama, biologi, fisika, inggris, prediksi),
+  )
+
+
+def get_students():
