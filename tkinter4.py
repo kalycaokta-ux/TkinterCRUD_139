@@ -34,3 +34,12 @@ def add_student(nama, biologi, fisika, inggris, prediksi):
 
 
 def get_students():
+  return run_query(
+      "SELECT id, nama_siswa, biologi, fisika, inggris, prediksi_fakultas FROM"
+      " nilai_siswa ORDER BY nama_siswa"
+  )
+
+
+init_db()
+
+root = tk.Tk()
