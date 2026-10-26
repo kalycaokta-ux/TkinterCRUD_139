@@ -107,3 +107,8 @@ def read_form():
 
 
 def clear_form():
+  for entry in entries.values():
+    entry.delete(0, tk.END)
+
+
+def refresh_table():
