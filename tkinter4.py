@@ -26,3 +26,11 @@ def init_db():
   
   
   def add_student(nama, biologi, fisika, inggris, prediksi):
+    run_query(
+        "INSERT INTO nilai_siswa (nama_siswa, biologi, fisika, inggris,"
+        " prediksi_fakultas) VALUES (?, ?, ?, ?, ?)",
+        (nama, biologi, fisika, inggris, prediksi),
+    )
+  
+  
+  def get_students():
