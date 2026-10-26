@@ -57,3 +57,53 @@ judul = tk.Label(
 judul.pack(pady=15)
 
 input_frame = tk.Frame(root, bg="#fffbfe")
+input_frame.pack(pady=5)
+
+# Definisi field input yang diminta
+fields = ["Nama Siswa", "Nilai Biologi", "Nilai Fisika", "Nilai Inggris"]
+entries = {}
+
+for i, field in enumerate(fields):
+  lbl = tk.Label(input_frame, text=field + ":", font=("Helvetica", 11), bg="#dcdcdc")
+  lbl.grid(row=i, column=0, sticky="w", pady=5, padx=10)
+
+  entry = tk.Entry(input_frame, width=25, font=("Helvetica", 11))
+  entry.grid(row=i, column=1, pady=5)
+  entries[field] = entry
+
+
+# --- 3. LOGIKA PREDIKSI & SUBMIT ---
+def read_form():
+  nama = entries["Nama Siswa"].get().strip()
+  bio_str = entries["Nilai Biologi"].get().strip()
+  fis_str = entries["Nilai Fisika"].get().strip()
+  ing_str = entries["Nilai Inggris"].get().strip()
+
+  if not nama or not bio_str or not fis_str or not ing_str:
+    messagebox.showwarning("Peringatan", "Semua kolom wajib diisi!")
+    return None
+
+  if not (bio_str.isdigit() and fis_str.isdigit() and ing_str.isdigit()):
+    messagebox.showwarning(
+        "Peringatan", "Nilai Biologi, Fisika, dan Inggris harus berupa angka!"
+    )
+    return None
+
+  biologi = int(bio_str)
+  fisika = int(fis_str)
+  inggris = int(ing_str)
+
+  # Kondisi nilai tertinggi untuk menentukan prediksi fakultas
+  if biologi > fisika and biologi > inggris:
+    prediksi = "Kedokteran"
+  elif fisika > biologi and fisika > inggris:
+    prediksi = "Teknik"
+  elif inggris > biologi and inggris > fisika:
+    prediksi = "Bahasa"
+  else:
+    prediksi = "Umum / Campuran"
+
+  return nama, biologi, fisika, inggris, prediksi
+
+
+def clear_form():
